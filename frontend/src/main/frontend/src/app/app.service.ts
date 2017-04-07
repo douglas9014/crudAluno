@@ -32,10 +32,10 @@ export class GrettingService {
 
     //(({id, content}) => this.gretting = new Gretting(id, content))
     //return this.gretting;
-    let gretting = JSON.parse(body.data, Gretting.reviver);
+    //let gretting = JSON.parse(body.data, Gretting.reviver);
     //let gretting = Gretting.fromJSON(JSON.parse(body));
-    alert(gretting);
-    return body.content;
+    //alert(body);
+    return body;
   }
 
   private handleError (error: Response | any) {
