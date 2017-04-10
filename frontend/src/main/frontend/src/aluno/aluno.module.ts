@@ -1,18 +1,18 @@
-/*import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { AlunoComponent } from './aluno.component';
 
-import { Gretting } from 'app/app.component';
+//import { Gretting } from 'app/app.component';
 
 // Services
 //import { AppService } from './app.service'; //
 
 @NgModule({
   declarations: [
-    AppComponent
+    AlunoComponent
   ],
   imports: [
     BrowserModule,
@@ -21,11 +21,10 @@ import { Gretting } from 'app/app.component';
     JsonpModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AlunoComponent]
 })
 
-export class AppModule {
+export class AlunoModule {
 
 
 }
-*/

@@ -7,34 +7,21 @@ import 'rxjs/add/operator/map';
 //import { Gretting } from 'app/app.component';
 
 @Injectable()
-export class GrettingService {
+export class AlunoService {
 
-  private greetingUrl = 'http://localhost:8080/greeting';  // URL to web API
+  private alunoUrl = 'http://localhost:8080/alunos';  // URL to web API
   //private gretting : Gretting;
 
   constructor (private http: Http) {}
 
-  getGretting(): Observable<JSON> {
-    return this.http.get(this.greetingUrl)
+  getAluno(): Observable<JSON> {
+    return this.http.get(this.alunoUrl)
                     .map(this.extractData)
-                    //.map(({id, content}) => new Gretting(id, content))
-                    //.map(res => {return res.json()})
                     .catch(this.handleError);
   }
 
   private extractData(res: Response) {
     let body = res.json();
-    //this.gretting = JSON.parse(body);
-    //return body.data || { };
-    //let bbody: any = JSON.parse(body); // string to generic object first
-    //let greeting: Gretting = <Gretting>bbody;
-
-
-    //(({id, content}) => this.gretting = new Gretting(id, content))
-    //return this.gretting;
-    //let gretting = JSON.parse(body.data, Gretting.reviver);
-    //let gretting = Gretting.fromJSON(JSON.parse(body));
-    //alert(body);
     return body;
   }
 

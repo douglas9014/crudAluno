@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { GrettingService } from 'app/app.service'
 
 
+//Por hora sem uso
+
 export interface greetingJSON {
   id:    number;
   name:     string;
@@ -30,7 +32,7 @@ export class AppComponent{
   errorMessage: string;
   mode = 'Observable';
   gretting: JSON;
-  greeting: Gretting;
+  //greeting: Gretting;
 
   constructor (private grettingService: GrettingService) {}
 
