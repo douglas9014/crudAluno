@@ -4,25 +4,29 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-//import { Gretting } from 'app/app.component';
+import { Aluno } from 'aluno/aluno.component';
 
 @Injectable()
 export class AlunoService {
 
   private alunoUrl = 'http://localhost:8080/alunos';  // URL to web API
-  //private gretting : Gretting;
 
   constructor (private http: Http) {}
 
-  getAluno(): Observable<JSON> {
+  getAluno(): Observable<Array<Object>> {
     return this.http.get(this.alunoUrl)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
   private extractData(res: Response) {
-    let body = res.json();
-    return body;
+    let body = res.json(); //Nesse momento a string retornada pelo servidor se torna um objeto
+    return body || {}; //O operador OU ali serve para não dar problema na aplicação caso retorne um valor nulo
+
+    //obj=JSON.stringify(body);
+    //let aluno = <Aluno>body;
+    //deferred.resolve(aluno);
+    //this.aluno=JSON.parse(body);
   }
 
   private handleError (error: Response | any) {

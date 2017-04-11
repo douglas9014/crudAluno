@@ -2,32 +2,43 @@ import { Component } from '@angular/core';
 
 import { AlunoService } from 'aluno/aluno.service'
 
+export class Aluno{ //Classe Aluno não utilizada até o momento, talvez nem precise dela
+  public id: number;
+  public name: string;
+  public gender: string;
+
+  constructor(id: number,
+              name: string,
+              gender: string){}
+}
+
+var obj;
+
 @Component({
-  selector: 'app-aluno',
-  templateUrl: './aluno.component.html',
+  selector: 'app-aluno', //Isso aqui vai no template do index.html, você cria um component
+  templateUrl: './aluno.component.html', //"tercerizou" o component para mais organização do codigo
   styleUrls: ['./aluno.component.css'],
-  providers: [AlunoService] //AlunoService aqui dentro depois
+  providers: [AlunoService] //Tem que colocar o serviço que fornece informação
 })
 
 export class AlunoComponent{
-  //ngOnDestroy(): void { document.body.appendChild(document.createElement("app-root")); }
   title = 'app works!';
 
   errorMessage: string;
   mode = 'Observable';
-  aluno: JSON;
-  //greeting: Gretting;
+  alunos: Array<Object>;
 
   constructor (private alunoService: AlunoService) {}
 
-  ngOnInit() { this.getAluno();
-
+  ngOnInit() { //Ao iniciar o ANGULAR 2
+    this.getAluno(); //De um get nos alunos
+    console.log(this.alunos);
   }
 
   getAluno() {
-    this.alunoService.getAluno()
+    this.alunoService.getAluno() //Pegue os alunos que estão no servidor
                      .subscribe(
-                       aluno => this.aluno = aluno,
+                       alunos => this.alunos = alunos,
                        error =>  this.errorMessage = <any>error);
   }
 }

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 //@RequestMapping("/aluno")
 public class AlunoController {
 
-	
+
     //@RequestMapping("/aluno")
 	/*public Aluno aluno(@RequestParam(value="name", defaultValue="José") String name) {
         return new Aluno(599,
@@ -29,27 +29,31 @@ public class AlunoController {
                         "Male");
     }
     */
-	
+
 	private Map<Integer, Aluno> alunos;
-	  
+
 	public AlunoController() {
 	  alunos = new HashMap<Integer, Aluno>();
-	 
+
 	  Aluno a1 = new Aluno(1, "José", "Male");
 	  Aluno a2 = new Aluno(2, "Paulão", "Male");
 	  Aluno a3 = new Aluno(3, "Ro", "Female");
-	 
+		Aluno a4 = new Aluno(4, "Douglas", "Male");
+		Aluno a5 = new Aluno(5, "Flaquer", "Male");
+
 	  alunos.put(1, a1);
 	  alunos.put(2, a2);
 	  alunos.put(3, a3);
+		alunos.put(4, a4);
+		alunos.put(5, a5);
 	}
-	 
+
 	@CrossOrigin
 	@RequestMapping(value = "/alunos", method = RequestMethod.GET)
 	public ResponseEntity<List<Aluno>> listar() {
 	  return new ResponseEntity<List<Aluno>>(new ArrayList<Aluno>(alunos.values()), HttpStatus.OK);
 	}
-	
+
 	/*
     @RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Aluno> addAluno(@RequestBody Aluno aluno) {
