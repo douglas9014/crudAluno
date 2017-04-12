@@ -36,6 +36,13 @@
 
 
 
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <type>jar</type>
+		    <scope>compile</scope>
+		</dependency>
+
 
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
