@@ -16,13 +16,13 @@ export class AlunoService {
   addAlunos(aluno): Observable<Aluno> {
 
     //let j = {"id":50,"name":"Joaoo","gender":"Male"};
-    let body = JSON.stringify(aluno);
+    let body = aluno;
     let headers = new Headers({ 'Content-Type': 'application/json' }); //Insetir options parece ser opcional
     let options = new RequestOptions({ headers: headers });
 
     console.log(body);
     console.log(JSON.stringify(aluno));
-    return this.http.post(this.alunoUrl + "/alunos", body, options) //Ai seria inserido após o body as options
+    return this.http.post(this.alunoUrl + "/alunos", body) //Ai seria inserido após o body as options
                     .map(this.extractData)
                     .catch(this.handleError);
   }
@@ -47,7 +47,11 @@ export class AlunoService {
   }
 
   private extractData(res: Response) {
-    let body = res.json(); //Nesse momento a string retornada pelo servidor se torna um objeto
+
+    let body
+    if(res.text()) { //Foi adicionado esse if, que as vezes (no post que deu esse problema "unexpected end of json") o servidor não retorna um documento json, então não é necessario tranformar em json
+      body = res.json(); //Nesse momento a string retornada pelo servidor se torna um objeto json
+    }
     return body || {}; //O operador OU ali serve para não dar problema na aplicação caso retorne um valor nulo
 
     //obj=JSON.stringify(body);
