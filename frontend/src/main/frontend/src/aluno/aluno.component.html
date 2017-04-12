@@ -11,7 +11,24 @@ Female<input type="radio" [(ngModel)]="aluno.gender" value="Female"/> Male <inpu
 <hr>
 <h1>Alunos Cadastrados</h1>
 
-<div *ngFor="let al of alunos">{{ al.id }} | {{ al.name }} | {{ al.gender }}</div> <!-- ngFor no modo watch, interagindo com o Aluno do aluno.component.ts -->
+<!-- <div *ngFor="let al of alunos">{{ al.id }} | {{ al.name }} | {{ al.gender }}</div> --> <!-- ngFor no modo watch, interagindo com o Aluno do aluno.component.ts -->
+
+<table class="table" border="1px">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Gender</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let al of alunos">
+      <td>{{al.id}}</td>
+      <td>{{al.name}}</td>
+      <td>{{al.gender}}</td>
+    </tr>
+    <tr *ngFor="let al of alunos">
+
+</table>
 
 <br>
 test binding {{aluno.id}} {{aluno.name}} {{aluno.gender}}

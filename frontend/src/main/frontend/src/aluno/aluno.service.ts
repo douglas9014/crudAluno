@@ -15,7 +15,6 @@ export class AlunoService {
 
   addAlunos(aluno): Observable<Aluno> {
 
-    //let j = {"id":50,"name":"Joaoo","gender":"Male"};
     let body = aluno;
     let headers = new Headers({ 'Content-Type': 'application/json' }); //Insetir options parece ser opcional
     let options = new RequestOptions({ headers: headers });

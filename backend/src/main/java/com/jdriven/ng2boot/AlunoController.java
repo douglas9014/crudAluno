@@ -124,7 +124,7 @@ public class AlunoController {
 		
 		//empService.save(employee);
 		//logger.debug("Added:: " + aluno);
-		return new ResponseEntity<Aluno>(aluConfirm, HttpStatus.CREATED); //Aqui ele retorna o objecto aluno como confirmação que deu tudo certo, lá no typescript ele vai tranformar em JSON novamente
+		return new ResponseEntity<Aluno>(aluConfirm, HttpStatus.CREATED); //Aqui ele retorna o objecto aluno como confirmação que deu tudo certo, lá no t ele vai tranformar em JSON novamente
 	}
 	/*
 	@CrossOrigin
