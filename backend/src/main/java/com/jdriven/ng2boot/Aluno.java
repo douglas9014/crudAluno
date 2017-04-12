@@ -2,23 +2,28 @@ package com.jdriven.ng2boot;
 
 public class Aluno {
 
-    private long id;
+    private int id;
     private String name;
     private String gender;
 
-    public Aluno(long id, String name, String gender) {
+    public Aluno(int id, String name, String gender) {
         this.id = id;
         this.name = name;
         this.gender = gender;
     }
 
-	public long getId() {
+	
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+
+
+	public void setId(int id) {
 		this.id = id;
 	}
+
+
 
 	public String getName() {
 		return name;

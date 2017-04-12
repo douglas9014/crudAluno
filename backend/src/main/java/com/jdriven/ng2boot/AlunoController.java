@@ -38,14 +38,14 @@ public class AlunoController {
 	  Aluno a1 = new Aluno(1, "José", "Male");
 	  Aluno a2 = new Aluno(2, "Paulão", "Male");
 	  Aluno a3 = new Aluno(3, "Ro", "Female");
-		Aluno a4 = new Aluno(4, "Douglas", "Male");
-		Aluno a5 = new Aluno(5, "Flaquer", "Male");
+	  Aluno a4 = new Aluno(4, "Douglas", "Male");
+	  Aluno a5 = new Aluno(5, "Flaquer", "Male");
 
 	  alunos.put(1, a1);
 	  alunos.put(2, a2);
 	  alunos.put(3, a3);
-		alunos.put(4, a4);
-		alunos.put(5, a5);
+	  alunos.put(4, a4);
+	  alunos.put(5, a5);
 	}
 
 	@CrossOrigin
@@ -54,14 +54,65 @@ public class AlunoController {
 	  return new ResponseEntity<List<Aluno>>(new ArrayList<Aluno>(alunos.values()), HttpStatus.OK);
 	}
 
-	/*
-    @RequestMapping(method = RequestMethod.POST)
+	@CrossOrigin
+	@RequestMapping(value = "/alunos/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Aluno> buscar(@PathVariable("id") Integer id) {
+	  Aluno aluno = alunos.get(id);
+
+	  if (aluno == null) {
+	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	  }
+
+	  return new ResponseEntity<Aluno>(aluno, HttpStatus.OK);
+	}
+
+	@CrossOrigin
+	@RequestMapping(value = "/alunos/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deletar(@PathVariable("id") int id) {
+	  Aluno aluno = alunos.remove(id);
+	  
+	  System.out.println("Deleeeeeeeeeeete");
+
+	  if (aluno == null) {
+	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	  }
+
+	  return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+ /*
+	@CrossOrigin
+	@RequestMapping(value = "/alunos/", method = RequestMethod.POST)
+	public ResponseEntity<?> adicionar(@PathVariable("id") int id) {
+	  Aluno aluno = alunos.remove(id);
+
+	  if (aluno == null) {
+	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	  }
+
+	  return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+*//*
+	@CrossOrigin
+	@RequestMapping(value = "/alunos", method = RequestMethod.POST)
 	public ResponseEntity<Aluno> addAluno(@RequestBody Aluno aluno) {
+		System.out.println("Before put");
+		Aluno aluConfirm = alunos.put(aluno.getId(), aluno);
+				
+		System.out.println("After put " + aluno.getName());
 		//empService.save(employee);
 		//logger.debug("Added:: " + aluno);
-		return new ResponseEntity<Aluno>(aluno, HttpStatus.CREATED);
-	}
-	*/
+		return new ResponseEntity<Aluno>(aluConfirm, HttpStatus.CREATED);
+	}*/
+	
+	@CrossOrigin
+	@RequestMapping(value = "/alunos", method = RequestMethod.POST)
+    public ResponseEntity<Aluno> createAluno(@RequestBody Aluno aluno) {
+        
+		System.out.println("After put " + aluno.getName());
+		return ResponseEntity.ok(aluno);
+		//return new ResponseEntity<Aluno>(aluno, HttpStatus.CREATED);
+    }
+
 }
 
 

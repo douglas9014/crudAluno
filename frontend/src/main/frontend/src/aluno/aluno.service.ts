@@ -1,5 +1,5 @@
 import { Injectable }              from '@angular/core';
-import { Http, Response }          from '@angular/http';
+import { Http, Response, Headers, RequestOptions }          from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -9,12 +9,37 @@ import { Aluno } from 'aluno/aluno.component';
 @Injectable()
 export class AlunoService {
 
-  private alunoUrl = 'http://localhost:8080/alunos';  // URL to web API
+  private alunoUrl = 'http://localhost:8080';  // URL to web API
 
   constructor (private http: Http) {}
 
-  getAluno(): Observable<Array<Object>> {
-    return this.http.get(this.alunoUrl)
+  addAlunos(aluno): Observable<Aluno> {
+
+    let body = JSON.stringify(aluno);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    console.log(JSON.stringify(aluno));
+    return this.http.post(this.alunoUrl + "/alunos", body)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  getAlunos(): Observable<Array<Object>> {
+    return this.http.get(this.alunoUrl + "/alunos")
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  getAlunoById(id: number): Observable<Aluno> {
+    console.log(id);
+    return this.http.get(this.alunoUrl + "/alunos/" + id)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  deleteAlunoById(id: number): Observable<Aluno> {
+    return this.http.delete(this.alunoUrl + "/alunos/" + id)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
