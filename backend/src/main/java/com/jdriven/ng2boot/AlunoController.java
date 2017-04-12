@@ -1,5 +1,6 @@
 package com.jdriven.ng2boot;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
@@ -102,17 +108,34 @@ public class AlunoController {
 		//empService.save(employee);
 		//logger.debug("Added:: " + aluno);
 		return new ResponseEntity<Aluno>(aluConfirm, HttpStatus.CREATED);
-	}*/
+	}
+	
+	*/
 	
 	@CrossOrigin
-	@RequestMapping(value = "/alunos", method = RequestMethod.POST)
-    public ResponseEntity<Aluno> createAluno(@RequestBody Aluno aluno) {
+	@RequestMapping(value = "/alunos", method = RequestMethod.POST) //Esse metodo recebe uma String em formato de JSON
+	public ResponseEntity<Aluno> addAluno(@RequestBody String alunoJSON) throws JsonParseException, JsonMappingException, IOException {
+		System.out.println("Before put");
+		
+		Aluno aluno = new ObjectMapper().readValue(alunoJSON, Aluno.class); //Aqui o json é convertido em objeto Java Aluno	
+		Aluno aluConfirm = alunos.put(aluno.getId(), aluno);
+		System.out.println("After put " + alunoJSON);
+		
+		
+		//empService.save(employee);
+		//logger.debug("Added:: " + aluno);
+		return new ResponseEntity<Aluno>(aluConfirm, HttpStatus.CREATED); //Aqui ele retorna o objecto aluno como confirmação que deu tudo certo, lá no typescript ele vai tranformar em JSON novamente
+	}
+	/*
+	@CrossOrigin
+	@RequestMapping(value = "/alunos", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> createAluno(@RequestBody Aluno aluno) {
         
 		System.out.println("After put " + aluno.getName());
 		return ResponseEntity.ok(aluno);
 		//return new ResponseEntity<Aluno>(aluno, HttpStatus.CREATED);
     }
-
+	*/
 }
 
 

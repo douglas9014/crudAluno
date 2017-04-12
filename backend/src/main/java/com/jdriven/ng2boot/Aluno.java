@@ -1,16 +1,18 @@
 package com.jdriven.ng2boot;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Aluno {
 
     private int id;
     private String name;
     private String gender;
 
-    public Aluno(int id, String name, String gender) {
+    public Aluno(@JsonProperty("id")int id, @JsonProperty("name")String name, @JsonProperty("gender")String gender) {
         this.id = id;
         this.name = name;
         this.gender = gender;
-    }
+    } //JsonProperty no constructor serve para dar apoio ao Jackson Object Mapper
 
 	
 	public int getId() {
@@ -40,7 +42,10 @@ public class Aluno {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
- 
+	/*
+	public Aluno(@JsonProperty("id")int id, @JsonProperty("name")String name, @JsonProperty("gender")String gender){
+		
+    }
+ 	*/
     
 }

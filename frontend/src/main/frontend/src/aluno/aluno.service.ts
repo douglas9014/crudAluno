@@ -15,12 +15,14 @@ export class AlunoService {
 
   addAlunos(aluno): Observable<Aluno> {
 
+    //let j = {"id":50,"name":"Joaoo","gender":"Male"};
     let body = JSON.stringify(aluno);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers({ 'Content-Type': 'application/json' }); //Insetir options parece ser opcional
     let options = new RequestOptions({ headers: headers });
 
+    console.log(body);
     console.log(JSON.stringify(aluno));
-    return this.http.post(this.alunoUrl + "/alunos", body)
+    return this.http.post(this.alunoUrl + "/alunos", body, options) //Ai seria inserido após o body as options
                     .map(this.extractData)
                     .catch(this.handleError);
   }
