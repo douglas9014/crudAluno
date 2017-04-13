@@ -35,7 +35,7 @@ public class AlunoDAO {
 			
 				PreparedStatement stmt = (PreparedStatement) this.connection.prepareStatement("SELECT * FROM alunos");
 				ResultSet rs = stmt.executeQuery();
-	
+				System.out.println("Entrou DAO");
 				List<Aluno> alunos = new ArrayList<Aluno>();
 				while (rs.next()) {
 					// criando o objeto Aluno

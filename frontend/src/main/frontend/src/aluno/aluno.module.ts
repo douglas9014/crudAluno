@@ -13,7 +13,7 @@ import { AlunoComponent } from './aluno.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    JsonpModule
+    JsonpModule,
   ],
   providers: [],
   bootstrap: [AlunoComponent]
