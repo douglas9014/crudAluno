@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "npm install --dev"
+    "postinstall": "npm install --only=dev"
   },
   "private": true,
   "dependencies": {
