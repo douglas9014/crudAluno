@@ -14,7 +14,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "preinstall": "npm install -g @angular/cli && npm install rsvp --save && npm -g install rsvp"
+    "preinstall": "npm install -g @angular/cli && npm install rsvp --save && npm -g install rsvp && npm install acorn --save && npm -g install acorn"
   },
   "private": true,
   "dependencies": {
