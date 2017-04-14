@@ -56,7 +56,7 @@ public class AlunoController {
 	  alunos.put(3, a3);
 	  alunos.put(4, a4);
 	  alunos.put(5, a5);
-	  
+
 	   */
 	}
 
@@ -64,15 +64,15 @@ public class AlunoController {
 	@RequestMapping(value = "/alunos", method = RequestMethod.GET)
 	public ResponseEntity<List<Aluno>> listar() throws SQLException {
 		//alunos = alunoDao.getLista();
-		
+
 		List<Aluno> alunosGet = new ArrayList<Aluno>();
 		alunos = new HashMap<Integer, Aluno>();
 		alunosGet = alunoDao.getLista();
-		
+
 		for (Aluno alu : alunosGet) { //Coloca todos alunos vindos do SELECT da DAO em um hashmap
 			alunos.put(alu.getId(), alu);
 		}
-		
+
 		return new ResponseEntity<List<Aluno>>(new ArrayList<Aluno>(alunos.values()), HttpStatus.OK);
 	}
 
@@ -84,24 +84,23 @@ public class AlunoController {
 	  if (aluno == null) {
 	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  }
-	  
+
 	  return new ResponseEntity<Aluno>(aluno, HttpStatus.OK);
 	}
 
 	@CrossOrigin
 	@RequestMapping(value = "/alunos/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deletar(@PathVariable("id") int id) {
-		List<Aluno> alunosGet = new ArrayList<Aluno>();
 		//String idConfirm = "";
 	  //Aluno aluno = alunos.remove(id);
 		alunoDao.excluir(id);
-		
+
 	  //System.out.println("Deleeeeeeeeeeete");
 
 	  //if (aluno == null) {
 	    //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  //}
-	  
+
 	  return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
  /*
