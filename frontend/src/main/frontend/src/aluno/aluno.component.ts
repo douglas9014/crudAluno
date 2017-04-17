@@ -12,8 +12,6 @@ export class Aluno{ //Classe Aluno não utilizada até o momento, talvez nem pre
   }
 }
 
-
-
 @Component({
   selector: 'app-aluno', //Isso aqui vai no template do index.html, você cria um component
   templateUrl: './aluno.component.html', //"tercerizou" o component para mais organização do codigo
@@ -45,6 +43,7 @@ export class AlunoComponent{
                      .subscribe(
                        aluno => this.aluno = aluno,
                        error =>  this.errorMessage = <any>error);
+                       location.reload();
   }
 
 
@@ -70,6 +69,7 @@ export class AlunoComponent{
       .subscribe(
         aluno => this.aluno = aluno,
         error =>  this.errorMessage = <any>error);
+        location.reload();
   }
 
   clean(): void {
