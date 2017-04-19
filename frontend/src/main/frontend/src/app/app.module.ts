@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router'; //Export para o router funcionar
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { AlunoComponent } from 'aluno/aluno.component';
@@ -14,7 +15,7 @@ import { Gretting } from 'app/app.component';
 //import { AppService } from './app.service'; //
 
 const appRoutes: Routes = [ //Define as rotas aqui
-  { path: 'alunos', component: AlunoComponent},
+  { path: 'cadastro', component: AlunoComponent},
   { path: 'home', component: HomeComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   //{ path: '**', component: PageNotFoundComponent }
@@ -34,7 +35,7 @@ const appRoutes: Routes = [ //Define as rotas aqui
     JsonpModule,
     RouterModule.forRoot(appRoutes) //"busca" as rotas aqui, declaradas lá em cima
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 
