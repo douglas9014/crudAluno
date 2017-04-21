@@ -35,7 +35,8 @@ public class AlunoDAO {
 	}
 
 	public List<Aluno> getLista() throws SQLException {
-		PreparedStatement stmt = (PreparedStatement) this.connection.prepareStatement("SELECT * FROM alunos"); // Constrói uma consulta SQL
+		 // Constrói uma consulta SQL:
+		PreparedStatement stmt = (PreparedStatement) this.connection.prepareStatement("SELECT * FROM alunos");
 		ResultSet rs = stmt.executeQuery(); // Executa a consulta e grava na variável [rs]
 		// System.out.println("Entrou DAO");
 
@@ -81,7 +82,6 @@ public class AlunoDAO {
 	}
 
 	public void excluir(int search) {
-
 		try {
 			PreparedStatement stmt = (PreparedStatement) this.connection
 					.prepareStatement("DELETE FROM alunos WHERE id = ?");
@@ -96,7 +96,6 @@ public class AlunoDAO {
 	}
 
 	public void altera(Aluno aluno) throws SQLException {
-
 		PreparedStatement stmt = (PreparedStatement) this.connection
 				.prepareStatement("UPDATE alunos SET nome=?, gender=? WHERE id=?");
 		stmt.setString(1, aluno.getName());
