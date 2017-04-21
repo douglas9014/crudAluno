@@ -35,29 +35,29 @@ public class AlunoDAO {
 	}
 
 	public List<Aluno> getLista() throws SQLException {
+		PreparedStatement stmt = (PreparedStatement) this.connection.prepareStatement("SELECT * FROM alunos"); // Constrói uma consulta SQL
+		ResultSet rs = stmt.executeQuery(); // Executa a consulta e grava na variável [rs]
+		// System.out.println("Entrou DAO");
 
-		PreparedStatement stmt = (PreparedStatement) this.connection.prepareStatement("SELECT * FROM alunos");
-		ResultSet rs = stmt.executeQuery();
-		System.out.println("Entrou DAO");
-		List<Aluno> alunos = new ArrayList<Aluno>();
-		while (rs.next()) {
-			// criando o objeto Aluno
-			Aluno aluno = new Aluno(-1, "", "");
+		List<Aluno> alunos = new ArrayList<Aluno>(); // Cria uma lista de objetos de classe [Aluno]
+		while (rs.next()) { // Loop que percorre a lista retornada pela consulta ao BD [SELECT]
+			Aluno aluno = new Aluno(-1, "", ""); // Cria um objeto da classe [Aluno]
+
+			// Grava seus atributos conforme o registro vindo do BD
 			aluno.setId(rs.getInt("id"));
 			aluno.setName(rs.getString("nome"));
 			aluno.setGender(rs.getString("gender"));
-			// adicionando o objeto à lista
-			alunos.add(aluno);
 
+			alunos.add(aluno); // Adiciona o objeto à lista de alunos
 		}
+		// "Fecha" a consulta ao BD
 		rs.close();
 		stmt.close();
-		return alunos;
 
+		return alunos;
 	}
 
 	public Aluno getAluno(int search) throws SQLException {
-
 		Aluno aluno = new Aluno(-1, "", "");
 
 		try {
@@ -77,7 +77,6 @@ public class AlunoDAO {
 		} catch (SQLException ex) {
 			System.out.println(ex.toString());
 		}
-
 		return (aluno);
 	}
 

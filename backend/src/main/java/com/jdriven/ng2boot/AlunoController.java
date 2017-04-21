@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import org.apache.log4j.Logger;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,25 +24,22 @@ import jdbc.dao.AlunoDAO;
 import java.sql.SQLException;
 
 @RestController
- //E isso
-//@RequestMapping("/aluno")
+//@RequestMapping("/aluno") // Define o caminho inicial do aplicativo.
 public class AlunoController {
-
-
-    //@RequestMapping("/aluno")
-	/*public Aluno aluno(@RequestParam(value="name", defaultValue="José") String name) {
-        return new Aluno(599,
-                        String.format(name),
-                        "Male");
-    }
-    */
+	// Código do projeto de exemplo "Greeting" (web service):
+	// public Aluno aluno(@RequestParam(value="name", defaultValue="José") String name) {
+  //       return new Aluno(599,
+  //                       String.format(name),
+  //                       "Male");
+  //   }
 
 	private Map<Integer, Aluno> alunos;
 	private AlunoDAO alunoDao = new AlunoDAO();
 
 	public AlunoController() throws SQLException {
 	  alunos = new HashMap<Integer, Aluno>();
-	  /*
+
+		/* Inserção manual de registros na memória:
 	  Aluno a1 = new Aluno(1, "José", "Male");
 	  Aluno a2 = new Aluno(2, "Paulão", "Male");
 	  Aluno a3 = new Aluno(3, "Ro", "Female");
@@ -56,23 +51,20 @@ public class AlunoController {
 	  alunos.put(3, a3);
 	  alunos.put(4, a4);
 	  alunos.put(5, a5);
-	  
 	   */
 	}
 
-	@CrossOrigin
-	@RequestMapping(value = "/alunos", method = RequestMethod.GET)
+	@CrossOrigin // Evita que navegadores bloqueiem requisições vindas de domínios diferentes.
+	@RequestMapping(value = "/alunos", method = RequestMethod.GET) // Define o caminho e o método da requisição HTTP atendida
 	public ResponseEntity<List<Aluno>> listar() throws SQLException {
-		//alunos = alunoDao.getLista();
-		
 		List<Aluno> alunosGet = new ArrayList<Aluno>();
 		alunos = new HashMap<Integer, Aluno>();
-		alunosGet = alunoDao.getLista();
-		
-		for (Aluno alu : alunosGet) { //Coloca todos alunos vindos do SELECT da DAO em um hashmap
+		alunosGet = alunoDao.getLista(); // Busca todos os registros do BD e grava na lista [alunosGet]
+
+		for (Aluno alu : alunosGet) { // Coloca todos alunos vindos do SELECT da DAO em um hashmap
 			alunos.put(alu.getId(), alu);
 		}
-		
+		// Retorna a lista de registros de alunos e responde a requisição HTTP com um "OK" (200):
 		return new ResponseEntity<List<Aluno>>(new ArrayList<Aluno>(alunos.values()), HttpStatus.OK);
 	}
 
@@ -80,28 +72,30 @@ public class AlunoController {
 	@RequestMapping(value = "/alunos/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Aluno> buscar(@PathVariable("id") Integer id) throws SQLException {
 	  //Aluno aluno = alunos.get(id);
-	  Aluno aluno = alunoDao.getAluno(id);
-	  if (aluno == null) {
-	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	  }
-	  
-	  return new ResponseEntity<Aluno>(aluno, HttpStatus.OK);
+	  Aluno aluno = alunoDao.getAluno(id); // Busca um determinado aluno
+
+	  if (aluno == null) { // Se não encontrar nenhum...
+	    return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Retorna resposta HTTP 404 (não encontrado)
+	  }else{ // Senão...
+			return new ResponseEntity<Aluno>(aluno, HttpStatus.OK); // Retorna o registro encontrado e a respota HTTP 200 (OK)
+		}
 	}
 
 	@CrossOrigin
-	@RequestMapping(value = "/alunos/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/alunos/{id}", method = RequestMethod.DELETE) // Recebe requisição HTTP de método DELETE
 	public ResponseEntity<?> deletar(@PathVariable("id") int id) {
+		alunoDao.excluir(id); // O DAO cuida da exclusão.
+
 		//List<Aluno> alunosGet = new ArrayList<Aluno>();
 		//String idConfirm = "";
 	  //Aluno aluno = alunos.remove(id);
-		alunoDao.excluir(id);
-		
+
 	  //System.out.println("Deleeeeeeeeeeete");
 
 	  //if (aluno == null) {
-	    //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	  //	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  //}
-	  
+
 	  return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
  /*
@@ -156,6 +150,3 @@ public class AlunoController {
     }
 	*/
 }
-
-
-//counter.incrementAndGet(),
