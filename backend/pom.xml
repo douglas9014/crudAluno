@@ -33,15 +33,19 @@
             <scope>runtime</scope>
         </dependency>
 
-
-
-
+		<!-- PostgreSQL -->
 		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <type>jar</type>
-		    <scope>compile</scope>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 		</dependency>
+
+		<!-- MySQL -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>mysql</groupId> -->
+<!-- 		    <artifactId>mysql-connector-java</artifactId> -->
+<!-- 		    <type>jar</type> -->
+<!-- 		    <scope>compile</scope> -->
+<!-- 		</dependency> -->
 
 
         <dependency>
